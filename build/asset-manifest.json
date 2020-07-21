@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/astral-recess.patrickme.dev/static/css/main.5f361e03.chunk.css",
+    "main.js": "/astral-recess.patrickme.dev/static/js/main.795ce157.chunk.js",
+    "main.js.map": "/astral-recess.patrickme.dev/static/js/main.795ce157.chunk.js.map",
+    "runtime-main.js": "/astral-recess.patrickme.dev/static/js/runtime-main.e8ee7a71.js",
+    "runtime-main.js.map": "/astral-recess.patrickme.dev/static/js/runtime-main.e8ee7a71.js.map",
+    "static/js/2.cc0a192d.chunk.js": "/astral-recess.patrickme.dev/static/js/2.cc0a192d.chunk.js",
+    "static/js/2.cc0a192d.chunk.js.map": "/astral-recess.patrickme.dev/static/js/2.cc0a192d.chunk.js.map",
+    "index.html": "/astral-recess.patrickme.dev/index.html",
+    "precache-manifest.470f31d184dd5c44e99fe0e1e1eb30fa.js": "/astral-recess.patrickme.dev/precache-manifest.470f31d184dd5c44e99fe0e1e1eb30fa.js",
+    "service-worker.js": "/astral-recess.patrickme.dev/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/astral-recess.patrickme.dev/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.cc0a192d.chunk.js.LICENSE.txt": "/astral-recess.patrickme.dev/static/js/2.cc0a192d.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/astral-recess.patrickme.dev/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e8ee7a71.js",
+    "static/js/2.cc0a192d.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.795ce157.chunk.js"
+  ]
+}
