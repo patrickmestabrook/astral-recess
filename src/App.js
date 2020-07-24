@@ -1,4 +1,6 @@
 import React from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import './App.css';
 
 function App() {
@@ -10,16 +12,23 @@ function App() {
         </header>
       </section>
 
-      <section className="tabs-container">
-        <ul className="tab-labels">
-          <li className="tab-label">meditations</li>
-          <li className="tab-label">tones</li>
-          <li className="tab-label">noises</li>
-        </ul>
-        <div className="tab-contents">
+      <Tabs>
+        <TabList>
+          <Tab>meditations</Tab>
+          <Tab>tones</Tab>
+          <Tab>noises</Tab>
+        </TabList>
+        <TabPanel>
+          <p>A playlist of guided meditations.</p>
+        </TabPanel>
+        <TabPanel>
+          <p>A tone(s) generator.</p>
+        </TabPanel>
+        <TabPanel>
+          <p>A noise(s) generator.</p>
+        </TabPanel>
 
-        </div>
-      </section>
+      </Tabs>
     </div>
   );
 }

@@ -19,33 +19,3 @@ header {
   flex: 1;
   max-width: 400px;
 }
-
-.tabs-container {
-  padding: 60px;
-  flex: 3;
-  background-color: darkslategrey;
-  display: flex;
-  flex-direction: column;
-}
-
-.tab-labels {
-  display: flex;
-  justify-content: space-between;
-  background-color: darkmagenta;
-  margin: 0 5px;
-  padding: 0;
-  list-style: none;
-}
-
-.tab-label {
-  border-radius: 4px 4px 0 0;
-  border: 1px solid black;
-  background-color: cyan;
-  flex: 1;
-  padding: 16px;
-}
-
-.tab-contents {
-  flex: 1;
-  background-color: fuchsia;
-}
