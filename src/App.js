@@ -5,20 +5,22 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
+      <header>
+        <h1>
           Astral Recess App Testbed
-        </p>
-        {/* <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
+        </h1>
       </header>
+      <section>
+        <h2>playlist</h2>
+      </section>
+
+      <section>
+        <h2>tone generator</h2>
+      </section>
+
+      <section>
+        <h2>noise generator</h2>
+      </section>
     </div>
   );
 }
