@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header>
-        <h1>
-          Astral Recess App Testbed
-        </h1>
-      </header>
-      <section>
-        <h2>playlist</h2>
+      <section className="info-sidebar">
+        <header>
+            Astral Recess App Testbed
+        </header>
       </section>
 
-      <section>
-        <h2>tone generator</h2>
-      </section>
+      <section className="tabs-container">
+        <ul className="tab-labels">
+          <li className="tab-label">meditations</li>
+          <li className="tab-label">tones</li>
+          <li className="tab-label">noises</li>
+        </ul>
+        <div className="tab-contents">
 
-      <section>
-        <h2>noise generator</h2>
+        </div>
       </section>
     </div>
   );
