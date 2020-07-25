@@ -1,6 +1,10 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+
+import MeditationPlaylist from './Components/MeditationPlaylist';
+import NoiseGenerator from './Components/NoiseGenerator';
+import ToneGenerators from './Components/ToneGenerators';
 import './App.css';
 
 function App() {
@@ -18,17 +22,11 @@ function App() {
           <Tab>tones</Tab>
           <Tab>noises</Tab>
         </TabList>
-        <TabPanel>
-          <p>A playlist of guided meditations.</p>
-        </TabPanel>
-        <TabPanel>
-          <p>A tone(s) generator.</p>
-        </TabPanel>
-        <TabPanel>
-          <p>A noise(s) generator.</p>
-        </TabPanel>
-
+        <TabPanel><MeditationPlaylist /></TabPanel>
+        <TabPanel><NoiseGenerator /></TabPanel>
+        <TabPanel><ToneGenerators /></TabPanel>
       </Tabs>
+
     </div>
   );
 }
