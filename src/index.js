@@ -1,12 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, StoreProvider } from 'easy-peasy';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const store = createStore({
+  tones: {
+    1: { id: 1, playing: false },
+    2: { id: 2, playing: true }
+  }
+})
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <StoreProvider store={store}>
+      <App />
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
