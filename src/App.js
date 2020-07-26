@@ -2,9 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
-import MeditationPlaylist from './Components/MeditationPlaylist';
-import NoiseGenerator from './Components/NoiseGenerator';
-import ToneGenerators from './Components/ToneGenerators';
+import {MeditationPlaylist, NoiseGenerator, ToneGenerators} from 'Components';
 import './App.css';
 
 function App() {
