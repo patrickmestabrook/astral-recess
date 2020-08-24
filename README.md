@@ -1,8 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
 Additionally this project uses:
- - [easy-peasy](https://easy-peasy.now.sh/)
- - [emotion](https://emotion.sh)
+ - [easy-peasy](https://easy-peasy.now.sh/) for state management
+ - [redux-saga](https://redux-saga.js.org/) for side-effects
+ - [emotion](https://emotion.sh) for styles
+ - [storybook](https://storybook.js.org/) for developing components in isolation
 
+I've found that this combination of tooling allows for clear separation of concerns in a way that maximizes testability and minimizes boilerplate.
 
 ### `yarn start`
 
