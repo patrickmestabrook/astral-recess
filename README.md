@@ -1,4 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
+Additionally this project uses:
+ - [easy-peasy](https://easy-peasy.sh)
+ - [emotion](https://emotion.sh)
 
 
 ### `yarn start`
