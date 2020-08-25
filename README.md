@@ -1,6 +1,9 @@
+welcome to :candle:astral recess:candle:
+========================================
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
 Additionally this project uses:
- - [easy-peasy](https://easy-peasy.now.sh/) for state management
+ - [easy-peasy](https://easy-peasy.now.sh/) for state management (redux with less boilerplate)
  - [redux-saga](https://redux-saga.js.org/) for side-effects
  - [emotion](https://emotion.sh) for styles
  - [storybook](https://storybook.js.org/) for developing components in isolation
