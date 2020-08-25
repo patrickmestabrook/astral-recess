@@ -15,7 +15,7 @@ I've found that this combination of tooling allows for clear separation of conce
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-###  `gh-pages deploy`
+###  `yarn deploy`
 
 Deploys the app to [https://astral-recess.patrickme.dev](https://astral-recess.patrickme.dev).<br />
 NB: Until I fix this, after each deploy you must edit the URL setting in the github repo settings
