@@ -75,8 +75,8 @@ function Layout() {
             <VerticalRange
               name="frequency"
               step={0.001}
-              min={40}
-              max={200}
+              min={20}
+              max={300}
               values={[oscillators[0].frequency]}
               onChange={([value]) => setOscillatorParameter({
                 oscillatorIndex: 0,
@@ -105,8 +105,8 @@ function Layout() {
             <VerticalRange
               name="frequency"
               step={0.001}
-              min={40}
-              max={200}
+              min={20}
+              max={300}
               values={[oscillators[1].frequency]}
               onChange={([value]) => setOscillatorParameter({
                 oscillatorIndex: 1,
@@ -126,6 +126,59 @@ function Layout() {
                 value
               })}
             />
+          </div>
+        </div>
+        <div style={{ marginRight: '100px'}}>
+          <label style={{ display: 'block', textAlign: 'center' }}>pink noise</label>
+          <div style={{ display: 'flex', flexDirection: 'row'}}>
+          <VerticalRange
+              name="filter freq"
+              step={0.002}
+              min={1}
+              max={10000}
+              values={[oscillators[3].frequency]}
+              onChange={([value]) => setOscillatorParameter({
+                oscillatorIndex: 3,
+                parameter: 'frequency',
+                value
+              })}
+            />
+            <VerticalRange
+              name="filter q"
+              step={0.001}
+              min={0}
+              max={15}
+              values={[oscillators[3].Q]}
+              onChange={([value]) => setOscillatorParameter({
+                oscillatorIndex: 3,
+                parameter: 'Q',
+                value
+              })}
+            />
+            <VerticalRange
+              name="volume"
+              step={0.001}
+              min={0}
+              max={0.25}
+              values={[oscillators[2].gain]}
+              onChange={([value]) => setOscillatorParameter({
+                oscillatorIndex: 2,
+                parameter: 'gain',
+                value
+              })}
+            />
+            {/* <VerticalRange
+              name="detune"
+              step={0.001}
+              min={-50}
+              max={50}
+              values={[oscillators[1].detune]}
+              onChange={([value]) => setOscillatorParameter({
+                oscillatorIndex: 1,
+                parameter: 'detune',
+                value
+              })}
+            /> */}
           </div>
         </div>
         <VerticalRange

@@ -64,6 +64,13 @@ const model = {
     {
       frequency: 71.6,
       detune: 0,
+    },
+    {
+      gain: 0.01,
+    },
+    {
+      frequency: 5000,
+      Q: 0,
     }
   ],
   setOscillatorParameter: action((state, payload) => {

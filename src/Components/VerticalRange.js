@@ -69,7 +69,7 @@ function VerticalRange({ name, step, min, max, values, onChange }) {
           </div>
         )}
       />
-      <label>{name}</label>
+      <label>{name}<br />{values[0]}</label>
     </div>
   );
 }
