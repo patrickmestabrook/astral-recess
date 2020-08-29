@@ -1,7 +1,7 @@
 import React from 'react';
 import { Direction, Range, getTrackBackground } from 'react-range';
 
-function VerticalRange({ name, step, min, max, values, onChange }) {
+function VerticalRange({ parameter, step, min, max, values, onChange }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px'}}>
       <Range
@@ -69,7 +69,7 @@ function VerticalRange({ name, step, min, max, values, onChange }) {
           </div>
         )}
       />
-      <label>{name}<br />{values[0]}</label>
+      <label>{parameter}<br />{values[0]}</label>
     </div>
   );
 }
