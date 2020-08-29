@@ -50,7 +50,7 @@ const model = {
     }),
 
     // Master volume
-    masterVolume: 0.5, // between 0 and 1
+    masterVolume: 0, // between 0 and 1
     setMasterVolume: action((state, payload) => {
       state.masterVolume = payload;
     })
@@ -76,6 +76,11 @@ const model = {
   setOscillatorParameter: action((state, payload) => {
     const { oscillatorIndex, parameter, value } = payload;
     state.oscillators[oscillatorIndex][parameter] = value;
+  }),
+
+  visualizer: null, // this is probably a bad idea.  Going to see if it works.
+  createVisualizer: action((state, payload) => {
+    state.visualizer = payload;
   }),
 
   // In order to do anything with an AudioContext,
