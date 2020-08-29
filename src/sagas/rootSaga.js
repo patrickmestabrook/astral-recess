@@ -27,26 +27,38 @@ function* initializeAudioSaga() {
 
 
   /*
-   * Oscillator 1 + panner
+   * Oscillator 1 + panner, visualizer
    */
   const oscillator1 = audioContext.createOscillator();
+  const oscillator1Gain = audioContext.createGain();
+  const oscillator1Visualizer = audioContext.createAnalyser();
+  const oscillator1Panner = audioContext.createStereoPanner();
   oscillator1.type = 'sine';
   oscillator1.frequency.value = 72; // value in hertz
-  const panner1 = audioContext.createStereoPanner();
-  panner1.pan.setValueAtTime(-1, audioContext.currentTime);
-  oscillator1.connect(panner1);
+  oscillator1Gain.gain.value = 0.5;
+  oscillator1Panner.pan.setValueAtTime(-1, audioContext.currentTime);
+  // connections
+  oscillator1.connect(oscillator1Gain);
+  oscillator1Gain.connect(oscillator1Visualizer);
+  oscillator1Visualizer.connect(oscillator1Panner);
   oscillator1.start();
 
 
   /*
-   * Oscillator 2 + panner
+   * Oscillator 2 + panner, visualizer
    */
   const oscillator2 = audioContext.createOscillator();
+  const oscillator2Gain = audioContext.createGain();
+  const oscillator2Visualizer = audioContext.createAnalyser();
+  const oscillator2Panner = audioContext.createStereoPanner();
   oscillator2.type = 'sine';
   oscillator2.frequency.value = 71.6; // value in hertz
-  const panner2 = audioContext.createStereoPanner();
-  panner2.pan.setValueAtTime(1, audioContext.currentTime);
-  oscillator2.connect(panner2);
+  oscillator2Gain.gain.value = 0.5;
+  oscillator2Panner.pan.setValueAtTime(1, audioContext.currentTime);
+  // connections
+  oscillator2.connect(oscillator2Gain);
+  oscillator2Gain.connect(oscillator2Visualizer);
+  oscillator2Visualizer.connect(oscillator2Panner);
   oscillator2.start();
 
 
@@ -91,8 +103,8 @@ function* initializeAudioSaga() {
   const masterVolume = audioContext.createGain();
   masterVolume.gain.value = 0;
   oscillator1.detune.setValueAtTime(-19, audioContext.currentTime); // value in cents
-  panner1.connect(masterVolume);
-  panner2.connect(masterVolume);
+  oscillator1Panner.connect(masterVolume);
+  oscillator2Panner.connect(masterVolume);
   pinkNoiseVolume.connect(masterVolume);
 
   // masterVolume.gain.linearRampToValueAtTime(0.5, audioContext.currentTime + 2);
@@ -102,16 +114,24 @@ function* initializeAudioSaga() {
    * Visualizer, animation
    */
   const visualizer = audioContext.createAnalyser();
-  visualizer.fftSize = 2048;
   masterVolume.connect(visualizer);
   visualizer.connect(audioContext.destination);
 
   /*
    * Listen for incoming actions that affect audio nodes
    */
-  const oscillators = [oscillator1, oscillator2, pinkNoiseVolume, pinkNoiseFilter];
+  const oscillators = [
+    oscillator1,
+    oscillator2,
+    pinkNoiseVolume,
+    pinkNoiseFilter,
+    oscillator1Gain,
+    oscillator2Gain
+  ];
   yield put({type: '@action.initializeApp'});
   yield put({type: '@action.createVisualizer', payload: visualizer});
+  yield put({type: '@action.createOsc1Visualizer', payload: oscillator1Visualizer});
+  yield put({type: '@action.createOsc2Visualizer', payload: oscillator2Visualizer});
   yield takeEvery('@action.mixer.setMasterVolume', setMasterVolume, masterVolume, audioContext);
   yield takeEvery('@action.setOscillatorParameter', setOscillatorParameter, oscillators);
 }

@@ -34,21 +34,6 @@ const model = {
   },
 
   mixer: {
-    // tracks is an array of objects
-    // each track in the mixer gets a volume and panning
-    tracks: [],
-    createTrack: action(state => {
-      state.tracks = [...state.tracks, { volume: 0.5, panning: 0 }]
-    }),
-    setTrackVolume: action((state, payload) => {
-      const { trackIndex, volume } = payload;
-      state.tracks[trackIndex].volume = volume;
-    }),
-    setTrackPanning: action((state, payload) => {
-      const { trackIndex, panning } = payload;
-      state.tracks[trackIndex].panning = panning;
-    }),
-
     // Master volume
     masterVolume: 0, // between 0 and 1
     setMasterVolume: action((state, payload) => {
@@ -71,6 +56,12 @@ const model = {
     {
       frequency: 5000,
       Q: 0,
+    },
+    {
+      gain: 0.5,
+    },
+    {
+      gain: 0.5,
     }
   ],
   setOscillatorParameter: action((state, payload) => {
@@ -78,9 +69,19 @@ const model = {
     state.oscillators[oscillatorIndex][parameter] = value;
   }),
 
+  // THIS IS ALL UGLY AND TERRIBLE
+  // FIND A BETTER WAY HOMIE
   visualizer: null, // this is probably a bad idea.  Going to see if it works.
   createVisualizer: action((state, payload) => {
     state.visualizer = payload;
+  }),
+  oscillator1Visualizer: null, // this is probably a bad idea.  Going to see if it works.
+  createOsc1Visualizer: action((state, payload) => {
+    state.oscillator1Visualizer = payload;
+  }),
+  oscillator2Visualizer: null, // this is probably a bad idea.  Going to see if it works.
+  createOsc2Visualizer: action((state, payload) => {
+    state.oscillator2Visualizer = payload;
   }),
 
   // In order to do anything with an AudioContext,
