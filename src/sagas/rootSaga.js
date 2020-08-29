@@ -15,6 +15,10 @@ function* setOscillatorParameter(oscillators, { payload }) {
   oscillators[oscillatorIndex][parameter].value = value;
 }
 
+
+/*
+ * INITIALIZE ALL THE WEB AUDIO TINGS
+ */
 function* initializeAudioSaga() {
 
   // create audio context
@@ -22,35 +26,33 @@ function* initializeAudioSaga() {
   const audioContext = new AudioContext();
 
 
+  /*
+   * Oscillator 1 + panner
+   */
   const oscillator1 = audioContext.createOscillator();
   oscillator1.type = 'sine';
   oscillator1.frequency.value = 72; // value in hertz
   const panner1 = audioContext.createStereoPanner();
   panner1.pan.setValueAtTime(-1, audioContext.currentTime);
   oscillator1.connect(panner1);
+  oscillator1.start();
 
 
+  /*
+   * Oscillator 2 + panner
+   */
   const oscillator2 = audioContext.createOscillator();
   oscillator2.type = 'sine';
   oscillator2.frequency.value = 71.6; // value in hertz
   const panner2 = audioContext.createStereoPanner();
   panner2.pan.setValueAtTime(1, audioContext.currentTime);
   oscillator2.connect(panner2);
-
-  // white noise
-  // const bufferSize = 2 * audioContext.sampleRate;
-  // const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-  // const output = noiseBuffer.getChannelData(0);
-  // for (let i = 0; i < bufferSize; i++) {
-  //     output[i] = Math.random() * 2 - 1;
-  // }
-
-  // const whiteNoise = audioContext.createBufferSource();
-  // whiteNoise.buffer = noiseBuffer;
-  // whiteNoise.loop = true;
+  oscillator2.start();
 
 
-  // pink noise
+  /*
+   * Pink Noise + filter, gain
+   */
   const bufferSize = 4096;
   const pinkNoise = (function() {
       var b0, b1, b2, b3, b4, b5, b6;
@@ -83,27 +85,33 @@ function* initializeAudioSaga() {
   pinkNoiseVolume.gain.value = 0.01;
 
 
-
-
+  /*
+   * Master Volume Gain Node, connections
+   */
   const masterVolume = audioContext.createGain();
   masterVolume.gain.value = 0;
   oscillator1.detune.setValueAtTime(-19, audioContext.currentTime); // value in cents
   panner1.connect(masterVolume);
   panner2.connect(masterVolume);
   pinkNoiseVolume.connect(masterVolume);
-  // whiteNoise.connect(masterVolume);
 
-  // whiteNoise.start(0);
-  oscillator1.start();
-  oscillator2.start();
-  masterVolume.gain.linearRampToValueAtTime(0.5, audioContext.currentTime + 2);
+  // masterVolume.gain.linearRampToValueAtTime(0.5, audioContext.currentTime + 2);
 
+
+  /*
+   * Visualizer, animation
+   */
   const visualizer = audioContext.createAnalyser();
+  visualizer.fftSize = 2048;
   masterVolume.connect(visualizer);
   visualizer.connect(audioContext.destination);
 
+  /*
+   * Listen for incoming actions that affect audio nodes
+   */
   const oscillators = [oscillator1, oscillator2, pinkNoiseVolume, pinkNoiseFilter];
   yield put({type: '@action.initializeApp'});
+  yield put({type: '@action.createVisualizer', payload: visualizer});
   yield takeEvery('@action.mixer.setMasterVolume', setMasterVolume, masterVolume, audioContext);
   yield takeEvery('@action.setOscillatorParameter', setOscillatorParameter, oscillators);
 }
