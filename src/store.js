@@ -42,6 +42,17 @@ const model = {
 
   presets: [
     {
+      mixer: { masterVolume: 0 },
+      audioNodes: [
+        { frequency: 72, detune: -19 },
+        { frequency: 71.6, detune: 0 },
+        { gain: 0.01 },
+        { frequency: 5000, Q: 0 },
+        { gain: 0.5 },
+        { gain: 0.5 }
+      ],
+    },
+    {
       mixer: { masterVolume: 0.5 },
       audioNodes: [
         { frequency: 163.733, detune: -19 },
@@ -74,7 +85,6 @@ const model = {
         { gain: 0.5 }
       ],
     },
-
     {
       mixer: { masterVolume: 0 },
       audioNodes: [
@@ -86,7 +96,6 @@ const model = {
         { gain: 0.5 }
       ],
     },
-
     {
       mixer: { masterVolume: 0 },
       audioNodes: [
