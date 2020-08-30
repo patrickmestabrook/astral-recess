@@ -6,68 +6,101 @@ const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
 
 const model = {
-  appIsInitialized: false,
-  initializeApp: action(state => {
-    state.appIsInitialized = true;
+  theme: 'light',
+  toggleTheme: action((state) => { state.theme = (state.theme === 'light' ? 'dark' : 'light'); }),
+
+  hasUserPermissionForAudio: false,
+  grantUserPermissionForAudio: action(state => { state.hasUserPermissionForAudio = true; }),
+
+  errors: ["Must get permission to use AudioContext."],
+  createError: action((state, payload) => { state.errors = [...state.errors, payload]; }),
+
+  activePreset: {
+    mixer: {
+      masterVolume: 0, // between 0 and 1
+      setMasterVolume: action((state, payload) => { state.masterVolume = payload; })
+    },
+    audioNodes: [
+      { frequency: 72, detune: -19 },
+      { frequency: 71.6, detune: 0 },
+      { gain: 0.01 },
+      { frequency: 5000, Q: 0 },
+      { gain: 0.5 },
+      { gain: 0.5 }
+    ],
+    setAudioNodeParameter: action((state, payload) => {
+      const { audioNodeIndex, parameter, value } = payload;
+      state.audioNodes[audioNodeIndex][parameter] = value;
+    }),
+  },
+
+  changeActivePreset: action((state, payload) => {
+    const { mixer, audioNodes } = payload;
+    state.activePreset.mixer = mixer;
+    state.activePreset.audioNodes = audioNodes;
   }),
 
-  transport: {
-    isPlaying: false,
-    isPaused: true,
-    isStopped: true,
+  presets: [
+    {
+      mixer: { masterVolume: 0.5 },
+      audioNodes: [
+        { frequency: 163.733, detune: -19 },
+        { frequency: 158.133, detune: 39.667 },
+        { gain: 0.0103 },
+        { frequency: 3367, Q: 0 },
+        { gain: 0.5 },
+        { gain: 0.5 }
+      ],
+    },
+    {
+      mixer: { masterVolume: 0 },
+      audioNodes: [
+        { frequency: 72, detune: -19 },
+        { frequency: 71.6, detune: 0 },
+        { gain: 0.01 },
+        { frequency: 5000, Q: 0 },
+        { gain: 0.5 },
+        { gain: 0.5 }
+      ],
+    },
+    {
+      mixer: { masterVolume: 0 },
+      audioNodes: [
+        { frequency: 72, detune: -19 },
+        { frequency: 71.6, detune: 0 },
+        { gain: 0.01 },
+        { frequency: 5000, Q: 0 },
+        { gain: 0.5 },
+        { gain: 0.5 }
+      ],
+    },
 
-    play: action(state => {
-      state.isPlaying = true;
-      state.isPaused = false;
-      state.isStopped = false;
-    }),
-    pause: action(state => {
-      state.isPlaying = false;
-      state.isPaused = true;
-      state.isStopped = false;
-    }),
-    stop: action(state => {
-      state.isPlaying = false;
-      state.isPaused = true;
-      state.isStopped = true;
-    }),
-  },
+    {
+      mixer: { masterVolume: 0 },
+      audioNodes: [
+        { frequency: 72, detune: -19 },
+        { frequency: 71.6, detune: 0 },
+        { gain: 0.01 },
+        { frequency: 5000, Q: 0 },
+        { gain: 0.5 },
+        { gain: 0.5 }
+      ],
+    },
 
-  mixer: {
-    // Master volume
-    masterVolume: 0, // between 0 and 1
-    setMasterVolume: action((state, payload) => {
-      state.masterVolume = payload;
-    })
-  },
-
-  oscillators: [
     {
-      frequency: 72,
-      detune: -19,
-    },
-    {
-      frequency: 71.6,
-      detune: 0,
-    },
-    {
-      gain: 0.01,
-    },
-    {
-      frequency: 5000,
-      Q: 0,
-    },
-    {
-      gain: 0.5,
-    },
-    {
-      gain: 0.5,
+      mixer: { masterVolume: 0 },
+      audioNodes: [
+        { frequency: 72, detune: -19 },
+        { frequency: 71.6, detune: 0 },
+        { gain: 0.01 },
+        { frequency: 5000, Q: 0 },
+        { gain: 0.5 },
+        { gain: 0.5 }
+      ],
     }
   ],
-  setOscillatorParameter: action((state, payload) => {
-    const { oscillatorIndex, parameter, value } = payload;
-    state.oscillators[oscillatorIndex][parameter] = value;
-  }),
+
+
 
   // THIS IS ALL UGLY AND TERRIBLE
   // FIND A BETTER WAY HOMIE
@@ -82,25 +115,6 @@ const model = {
   oscillator2Visualizer: null, // this is probably a bad idea.  Going to see if it works.
   createOsc2Visualizer: action((state, payload) => {
     state.oscillator2Visualizer = payload;
-  }),
-
-  // In order to do anything with an AudioContext,
-  // we first need user permission. [Web Audio API]
-  hasUserPermissionForAudio: false,
-  grantUserPermissionForAudio: action(state => {
-    state.hasUserPermissionForAudio = true;
-  }),
-
-
-  theme: 'light',
-  toggleTheme: action((state) => {
-    state.theme = (state.theme === 'light' ? 'dark' : 'light');
-  }),
-
-  errors: ["Must get permission to use AudioContext."],
-
-  createError: action((state, payload) => {
-    state.errors = [...state.errors, payload];
   }),
 };
 
