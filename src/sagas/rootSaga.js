@@ -1,66 +1,35 @@
-import { call, delay, put, takeEvery, all } from 'redux-saga/effects'
-
-function doSetMasterVolume(masterVolume, audioContext, value) {
-  console.log('doSetMasterVolume');
-  console.log('audioContext.currentTime is', audioContext.currentTime);
-  masterVolume.gain.linearRampToValueAtTime(value, audioContext.currentTime + 0.1);
-}
-
-function* setMasterVolume(masterVolume, audioContext, { payload }) {
-  yield call(doSetMasterVolume, masterVolume, audioContext, payload);
-}
-
-function* setOscillatorParameter(oscillators, { payload }) {
-  const { oscillatorIndex, parameter, value } = payload;
-  oscillators[oscillatorIndex][parameter].value = value;
-}
-
+import { put, takeEvery, all } from 'redux-saga/effects'
+import {
+  createAudioContext,
+  createOscillator,
+  setMasterVolume,
+  setOscillatorParameter,
+} from 'audio/helpers';
 
 /*
  * INITIALIZE ALL THE WEB AUDIO TINGS
  */
 function* initializeAudioSaga() {
-
-  // create audio context
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
-  const audioContext = new AudioContext();
+  const [audioContext, masterGain, masterAnalyser] = createAudioContext();
 
 
-  /*
-   * Oscillator 1 + panner, visualizer
-   */
-  const oscillator1 = audioContext.createOscillator();
-  const oscillator1Gain = audioContext.createGain();
-  const oscillator1Visualizer = audioContext.createAnalyser();
-  const oscillator1Panner = audioContext.createStereoPanner();
-  oscillator1.type = 'sine';
-  oscillator1.frequency.value = 72; // value in hertz
-  oscillator1Gain.gain.value = 0.5;
-  oscillator1Panner.pan.setValueAtTime(-1, audioContext.currentTime);
-  // connections
-  oscillator1.connect(oscillator1Gain);
-  oscillator1Gain.connect(oscillator1Visualizer);
-  oscillator1Visualizer.connect(oscillator1Panner);
-  oscillator1.start();
-
-
-  /*
-   * Oscillator 2 + panner, visualizer
-   */
-  const oscillator2 = audioContext.createOscillator();
-  const oscillator2Gain = audioContext.createGain();
-  const oscillator2Visualizer = audioContext.createAnalyser();
-  const oscillator2Panner = audioContext.createStereoPanner();
-  oscillator2.type = 'sine';
-  oscillator2.frequency.value = 71.6; // value in hertz
-  oscillator2Gain.gain.value = 0.5;
-  oscillator2Panner.pan.setValueAtTime(1, audioContext.currentTime);
-  // connections
-  oscillator2.connect(oscillator2Gain);
-  oscillator2Gain.connect(oscillator2Visualizer);
-  oscillator2Visualizer.connect(oscillator2Panner);
-  oscillator2.start();
-
+  const [osc1, osc1Gain, osc1Analyser] = createOscillator(
+    audioContext,
+    masterGain,
+    {
+      frequency: 79,
+      detune: -19,
+      pan: -1,
+    }
+  );
+  const [osc2, osc2Gain, osc2Analyser] = createOscillator(
+    audioContext,
+    masterGain,
+    {
+      frequency: 78,
+      pan: 1,
+    }
+  );
 
   /*
    * Pink Noise + filter, gain
@@ -95,44 +64,29 @@ function* initializeAudioSaga() {
   pinkNoiseFilter.frequency.value = 5000;
   pinkNoiseFilter.Q.value = 0;
   pinkNoiseVolume.gain.value = 0.01;
+  pinkNoiseVolume.connect(masterGain);
 
-
-  /*
-   * Master Volume Gain Node, connections
-   */
-  const masterVolume = audioContext.createGain();
-  masterVolume.gain.value = 0;
-  oscillator1.detune.setValueAtTime(-19, audioContext.currentTime); // value in cents
-  oscillator1Panner.connect(masterVolume);
-  oscillator2Panner.connect(masterVolume);
-  pinkNoiseVolume.connect(masterVolume);
-
-  // masterVolume.gain.linearRampToValueAtTime(0.5, audioContext.currentTime + 2);
-
-
-  /*
-   * Visualizer, animation
-   */
-  const visualizer = audioContext.createAnalyser();
-  masterVolume.connect(visualizer);
-  visualizer.connect(audioContext.destination);
 
   /*
    * Listen for incoming actions that affect audio nodes
    */
   const oscillators = [
-    oscillator1,
-    oscillator2,
+    osc1,
+    osc2,
     pinkNoiseVolume,
     pinkNoiseFilter,
-    oscillator1Gain,
-    oscillator2Gain
+    osc1Gain,
+    osc2Gain
   ];
-  yield put({type: '@action.initializeApp'});
-  yield put({type: '@action.createVisualizer', payload: visualizer});
-  yield put({type: '@action.createOsc1Visualizer', payload: oscillator1Visualizer});
-  yield put({type: '@action.createOsc2Visualizer', payload: oscillator2Visualizer});
-  yield takeEvery('@action.mixer.setMasterVolume', setMasterVolume, masterVolume, audioContext);
+
+  // this is a terrible way of giving some canvas components access to the analyser nodes
+  // @TODO fix this in a smart and good and sane way please
+  yield put({type: '@action.createVisualizer', payload: masterAnalyser});
+  yield put({type: '@action.createOsc1Visualizer', payload: osc1Analyser});
+  yield put({type: '@action.createOsc2Visualizer', payload: osc2Analyser});
+
+  // listen for parameter changes
+  yield takeEvery('@action.mixer.setMasterVolume', setMasterVolume, masterGain, audioContext);
   yield takeEvery('@action.setOscillatorParameter', setOscillatorParameter, oscillators);
 }
 
