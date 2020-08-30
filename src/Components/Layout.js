@@ -44,7 +44,7 @@ const useVisualizer = (canvasRef, visualizer) => (
       visualizer.getByteTimeDomainData(dataArray);
       context.fillStyle = "rgb(200, 200, 200)";
       context.fillRect(0, 0, canvas.width, canvas.height);
-      context.lineWidth = 2;
+      context.lineWidth = 10;
       context.strokeStyle = "rgb(0, 0, 0)";
       context.beginPath();
       var sliceWidth = canvas.width * 1.0 / bufferLength;
@@ -70,7 +70,6 @@ function Layout() {
   const visualizer = useStoreState(state => state.visualizer);
   const oscillator1Visualizer = useStoreState(state => state.oscillator1Visualizer);
   const oscillator2Visualizer = useStoreState(state => state.oscillator2Visualizer);
-  console.log('visualizer is', visualizer);
 
   /*
    * Canvas experiment
@@ -112,21 +111,21 @@ function Layout() {
             <OscillatorParameterRange
               oscillatorIndex={0}
               parameter="frequency"
-              step={0.001}
+              step={0.0001}
               min={20}
               max={300}
             />
             <OscillatorParameterRange
               oscillatorIndex={0}
               parameter="detune"
-              step={0.001}
+              step={0.0001}
               min={-50}
               max={50}
             />
             <OscillatorParameterRange
               oscillatorIndex={4}
               parameter="gain"
-              step={0.001}
+              step={0.0001}
               min={0}
               max={0.5}
             />
@@ -139,21 +138,18 @@ function Layout() {
             <OscillatorParameterRange
               oscillatorIndex={1}
               parameter="frequency"
-              step={0.001}
               min={20}
               max={300}
             />
             <OscillatorParameterRange
               oscillatorIndex={1}
               parameter="detune"
-              step={0.001}
               min={-50}
               max={50}
             />
             <OscillatorParameterRange
               oscillatorIndex={5}
               parameter="gain"
-              step={0.001}
               min={0}
               max={0.5}
             />
@@ -166,21 +162,21 @@ function Layout() {
             <OscillatorParameterRange
               oscillatorIndex={3}
               parameter="frequency"
-              step={0.001}
+              step={0.0001}
               min={1}
               max={10000}
             />
             <OscillatorParameterRange
               oscillatorIndex={3}
               parameter="Q"
-              step={0.001}
+              step={0.0001}
               min={0}
               max={15}
             />
             <OscillatorParameterRange
               oscillatorIndex={2}
               parameter="gain"
-              step={0.001}
+              step={0.0001}
               min={0}
               max={0.25}
             />
