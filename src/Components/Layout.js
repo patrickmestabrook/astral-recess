@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { Button, OscillatorParameterRange, VerticalRange } from 'Components';
+import { Button, AudioNodeParameterRange, VerticalRange } from 'Components';
 import { ControlGroup, ControlLabel, Controls, ControlsWrapper } from './Styled';
 
 
@@ -20,6 +20,13 @@ const getPixelRatio = context => {
   return (window.devicePixelRatio || 1) / backingStore;
 };
 
+
+/**
+ * @function
+ * @name useVisualizer
+ * @param {*} canvasRef
+ * @param {*} visualizer
+ */
 const useVisualizer = (canvasRef, visualizer) => (
   () => {
     if (!canvasRef || !canvasRef.current) return;
@@ -65,26 +72,30 @@ const useVisualizer = (canvasRef, visualizer) => (
   }
 );
 
+
+/**
+ * @function
+ * @name Layout
+ */
 function Layout() {
 
-  const visualizer = useStoreState(state => state.visualizer);
-  const oscillator1Visualizer = useStoreState(state => state.oscillator1Visualizer);
-  const oscillator2Visualizer = useStoreState(state => state.oscillator2Visualizer);
-
-  /*
-   * Canvas experiment
-   */
+  // const visualizer = useStoreState(state => state.visualizer);
+  // const oscillator1Visualizer = useStoreState(state => state.oscillator1Visualizer);
+  // const oscillator2Visualizer = useStoreState(state => state.oscillator2Visualizer);
   let canvasRef = useRef();
   let osc1Ref = useRef();
   let osc2Ref = useRef();
-  useEffect(useVisualizer(canvasRef, visualizer));
-  useEffect(useVisualizer(osc1Ref, oscillator1Visualizer));
-  useEffect(useVisualizer(osc2Ref, oscillator2Visualizer));
+  // useEffect(useVisualizer(canvasRef, visualizer));
+  // useEffect(useVisualizer(osc1Ref, oscillator1Visualizer));
+  // useEffect(useVisualizer(osc2Ref, oscillator2Visualizer));
 
   const mixer = {
-    ...useStoreState(state => state.mixer),
-    ...useStoreActions(actions => actions.mixer),
+    ...useStoreState(state => state.activePreset.mixer),
+    ...useStoreActions(actions => actions.activePreset.mixer),
   };
+
+  const changeActivePreset = useStoreActions(actions => actions.changeActivePreset);
+  const presets = useStoreState(state => state.presets);
 
   const hasUserPermissionForAudio = useStoreState(state => state.hasUserPermissionForAudio);
   const grantUserPermissionForAudio = useStoreActions(
@@ -103,27 +114,36 @@ function Layout() {
 
   return (
     <div>
-      <ControlsWrapper>
+      <div>
+        <h3>presets</h3>
+        <Button onClick={() => changeActivePreset(presets[0])}>1</Button>
+        <Button onClick={() => changeActivePreset(presets[1])}>2</Button>
+        <Button onClick={() => changeActivePreset(presets[2])}>3</Button>
+        <Button onClick={() => changeActivePreset(presets[3])}>4</Button>
+        <Button onClick={() => changeActivePreset(presets[4])}>5</Button>
+        <Button onClick={() => changeActivePreset(presets[5])}>6</Button>
 
+      </div>
+      <ControlsWrapper>
         <ControlGroup>
           <ControlLabel>left oscillator</ControlLabel>
           <Controls>
-            <OscillatorParameterRange
-              oscillatorIndex={0}
+            <AudioNodeParameterRange
+              audioNodeIndex={0}
               parameter="frequency"
               step={0.0001}
               min={20}
               max={300}
             />
-            <OscillatorParameterRange
-              oscillatorIndex={0}
+            <AudioNodeParameterRange
+              audioNodeIndex={0}
               parameter="detune"
               step={0.0001}
               min={-50}
               max={50}
             />
-            <OscillatorParameterRange
-              oscillatorIndex={4}
+            <AudioNodeParameterRange
+              audioNodeIndex={4}
               parameter="gain"
               step={0.0001}
               min={0}
@@ -135,20 +155,20 @@ function Layout() {
         <ControlGroup>
           <ControlLabel>right oscillator</ControlLabel>
           <Controls>
-            <OscillatorParameterRange
-              oscillatorIndex={1}
+            <AudioNodeParameterRange
+              audioNodeIndex={1}
               parameter="frequency"
               min={20}
               max={300}
             />
-            <OscillatorParameterRange
-              oscillatorIndex={1}
+            <AudioNodeParameterRange
+              audioNodeIndex={1}
               parameter="detune"
               min={-50}
               max={50}
             />
-            <OscillatorParameterRange
-              oscillatorIndex={5}
+            <AudioNodeParameterRange
+              audioNodeIndex={5}
               parameter="gain"
               min={0}
               max={0.5}
@@ -159,22 +179,22 @@ function Layout() {
         <ControlGroup>
           <ControlLabel>pink noise</ControlLabel>
           <Controls>
-            <OscillatorParameterRange
-              oscillatorIndex={3}
+            <AudioNodeParameterRange
+              audioNodeIndex={3}
               parameter="frequency"
               step={0.0001}
               min={1}
               max={10000}
             />
-            <OscillatorParameterRange
-              oscillatorIndex={3}
+            <AudioNodeParameterRange
+              audioNodeIndex={3}
               parameter="Q"
               step={0.0001}
               min={0}
               max={15}
             />
-            <OscillatorParameterRange
-              oscillatorIndex={2}
+            <AudioNodeParameterRange
+              audioNodeIndex={2}
               parameter="gain"
               step={0.0001}
               min={0}
