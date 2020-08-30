@@ -5,7 +5,7 @@ import { VerticalRange } from 'Components';
 function OscillatorParameterRange({
   oscillatorIndex,
   parameter,
-  step,
+  step = 0.0001,
   min,
   max
 }) {
