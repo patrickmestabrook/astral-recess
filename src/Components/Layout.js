@@ -51,7 +51,7 @@ const useVisualizer = (canvasRef, visualizer) => (
       visualizer.getByteTimeDomainData(dataArray);
       context.fillStyle = "rgb(200, 200, 200)";
       context.fillRect(0, 0, canvas.width, canvas.height);
-      context.lineWidth = 10;
+      context.lineWidth = 6;
       context.strokeStyle = "rgb(0, 0, 0)";
       context.beginPath();
       var sliceWidth = canvas.width * 1.0 / bufferLength;
@@ -79,15 +79,15 @@ const useVisualizer = (canvasRef, visualizer) => (
  */
 function Layout() {
 
-  // const visualizer = useStoreState(state => state.visualizer);
-  // const oscillator1Visualizer = useStoreState(state => state.oscillator1Visualizer);
-  // const oscillator2Visualizer = useStoreState(state => state.oscillator2Visualizer);
+  const visualizer = useStoreState(state => state.visualizer);
+  const oscillator1Visualizer = useStoreState(state => state.oscillator1Visualizer);
+  const oscillator2Visualizer = useStoreState(state => state.oscillator2Visualizer);
   let canvasRef = useRef();
   let osc1Ref = useRef();
   let osc2Ref = useRef();
-  // useEffect(useVisualizer(canvasRef, visualizer));
-  // useEffect(useVisualizer(osc1Ref, oscillator1Visualizer));
-  // useEffect(useVisualizer(osc2Ref, oscillator2Visualizer));
+  useEffect(useVisualizer(canvasRef, visualizer));
+  useEffect(useVisualizer(osc1Ref, oscillator1Visualizer));
+  useEffect(useVisualizer(osc2Ref, oscillator2Visualizer));
 
   const mixer = {
     ...useStoreState(state => state.activePreset.mixer),
