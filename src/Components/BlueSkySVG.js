@@ -2,7 +2,7 @@ import React from 'react';
 
 function BlueSkySVG() {
   return (
-      <svg version="1.0"  viewBox="0 0 18000 12000" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <svg version="1.0"  width="100%" height="100%" viewBox="0 0 18000 12000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
   <defs></defs>
   <g transform="matrix(1, 0, 0, -1, 9003, 12001)">
     <g id="layer101" fill="#205bb2" stroke="none">
