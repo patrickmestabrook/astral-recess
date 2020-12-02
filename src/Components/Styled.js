@@ -22,11 +22,18 @@ export const Wrapper = styled.div`
 `;
 
 export const InteractionBox = styled.div`
-  width: 450px;
-  height: 340px;
-  background: rgba(255,255,255,0.95);
+  width: 300px;
+  height: 300px;
+  background: rgba(250,250,250,1);
   text-align: center;
-  border-radius: 26px;
   padding: 50px;
-  box-shadow: 39px 39px 0px 10px rgba(0,0,0,0.14), 0px 0px 0px 25px rgba(255,255,255,0.2);
+  box-shadow: 60px 60px 0px 0px rgba(0,0,0,0.18);
+  /* box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.12),
+  -10px -10px 0px 0px rgba(255,255,255,0.2),
+  10px -10px 0px 0px rgba(255,255,255,0.12),
+  -10px 10px 0px 0px rgba(255,255,255,0.12),
+  -4px 4px 0px 0px rgba(0,0,0,0.15),
+  4px -4px 0px 0px rgba(0,0,0,0.15),
+  -4px -4px 0px 0px rgba(0,0,0,0.15),
+  4px 4px 0px 0px rgba(0,0,0,0.15); */
 `;
