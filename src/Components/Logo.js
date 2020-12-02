@@ -2,6 +2,23 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 
+import { keyframes } from '@emotion/react'
+
+const enter = keyframes`
+  from, {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
+
+const LogoSpan = styled.span`
+  animation: ${enter} 0.9s ease normal;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  animation-delay: 1s;
+`;
 const LogoWrapper = styled.div`
   font-family: 'Roboto Slab', serif;
   color: black;
@@ -19,7 +36,9 @@ const LogoWrapper = styled.div`
 function Logo() {
   return (
     <LogoWrapper>
-      astral <br /> recess
+      <LogoSpan>
+        astral <br /> recess
+      </LogoSpan>
     </LogoWrapper>
   );
 }
