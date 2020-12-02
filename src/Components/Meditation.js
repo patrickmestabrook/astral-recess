@@ -18,30 +18,8 @@ function Meditation() {
         <MeditationSettingsForm
           onSubmit={(e) => { e.preventDefault(); }}
         >
-          <div>
-            <label htmlFor="duration">How long?</label>
-            <input
-              id="duration"
-              type="number"
-              onChange={({ target: { value }}) => editMeditationSetting({ setting: 'duration', value })}
-              value={meditationSettings.duration}
-            /> minutes
-          </div>
-          <label htmlFor="sound-preset">Audio?</label>
-          <div>
 
-          <label htmlFor="intention">Set your intention.</label>
-            <textarea
-              id="intention"
-              type="text"
-              onChange={({ target: { value }}) => editMeditationSetting({ setting: 'intention', value })}
-              value={meditationSettings.intention}
-            />
-          </div>
-          <input
-            type="submit"
-            value="Meditate"
-          />
+
         </MeditationSettingsForm>
     </AppWrapper>
   );
