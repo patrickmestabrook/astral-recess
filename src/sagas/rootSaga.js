@@ -12,7 +12,7 @@ import {
   setMasterVolume,
   setAudioNodeParameter,
   setAllAudioParameters,
-} from 'audio/helpers';
+} from 'helpers/audio';
 
 
 /**

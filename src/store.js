@@ -12,8 +12,16 @@ const model = {
   hasUserPermissionForAudio: false,
   grantUserPermissionForAudio: action(state => { state.hasUserPermissionForAudio = true; }),
 
-  errors: ["Must get permission to use AudioContext."],
-  createError: action((state, payload) => { state.errors = [...state.errors, payload]; }),
+  meditationSettings: {
+    duration: 10, // in minutes
+    endingSound: null,
+    preset: 1,
+    intention: "",
+    editMeditationSetting: action((state, payload) => {
+      const { setting, value } = payload;
+      state[setting] = value;
+    })
+  },
 
   activePreset: {
     mixer: {

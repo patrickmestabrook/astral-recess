@@ -20,3 +20,18 @@ export const Controls = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+export const AppTitle = styled.h1`
+  font-family: Roboto mono;
+`;
+
+export const AppWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const MeditationSettingsForm = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
