@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStoreActions, useStoreState } from 'easy-peasy';
 import { AppTitle, AppWrapper, MeditationSettingsForm } from 'Components/Styled';
 
 
@@ -8,8 +7,6 @@ import { AppTitle, AppWrapper, MeditationSettingsForm } from 'Components/Styled'
  * @name Meditation
  */
 function Meditation() {
-  const meditationSettings = useStoreState(state => state.meditationSettings);
-  const editMeditationSetting = useStoreActions(actions => actions.meditationSettings.editMeditationSetting);
   return (
     <AppWrapper>
       <AppTitle>welcome to Astral Recess</AppTitle>
