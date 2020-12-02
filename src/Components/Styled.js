@@ -22,12 +22,12 @@ export const Wrapper = styled.div`
 `;
 
 export const InteractionBox = styled.div`
-  width: 450px;
+  width: 250px;
   height: 250px;
-  background: rgba(255,255,255,1);
-  border-radius: 12px;
-  border: 4px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.9);
   text-align: center;
+  border-radius: 4px;
+  /* border: 7px solid #fff; */
   padding: 50px;
-  box-shadow: 0px 0px 38px 4px rgba(0,0,0,0.1);
+  box-shadow: 86px 86px 0px 0px rgba(0,0,0,0.32), -86px -86px 0px 0px rgba(0,0,0,0.32);
 `;
