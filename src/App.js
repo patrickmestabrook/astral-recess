@@ -1,16 +1,21 @@
 import React from 'react';
 import { StoreProvider } from 'easy-peasy';
 import store from './store';
-import { Wrapper } from 'Components/Styled';
+import {
+  Background,
+  InteractionBox,
+  Wrapper
+} from 'Components/Styled';
+import { BlueSkySVG } from 'Components';
 
 function App() {
   return (
     <StoreProvider store={store}>
+      <Background>
+        <BlueSkySVG />
+      </Background>
       <Wrapper>
-      <svg viewBox="0 0 1500 1500" xmlns="http://www.w3.org/2000/svg">
-        <defs></defs>
-        <path d="M 182.795 247.346 C 168.111 247.346 154.648 242.118 144.166 233.421 C 139.757 234.342 135.189 234.826 130.507 234.826 C 93.798 234.826 64.039 205.067 64.039 168.358 C 64.039 134.457 89.419 106.484 122.215 102.402 C 135.126 79.977 159.334 64.88 187.068 64.88 C 211 64.88 232.307 76.122 245.995 93.613 C 249.773 92.665 253.734 92.16 257.814 92.16 C 277.611 92.16 294.578 104.035 301.712 120.917 C 307.121 118.973 312.952 117.914 319.03 117.914 C 347.308 117.914 370.231 140.837 370.231 169.115 C 370.231 197.393 347.308 220.316 319.03 220.316 C 313.813 220.316 308.778 219.536 304.035 218.085 C 295.917 235.281 278.418 247.18 258.141 247.18 C 244.238 247.18 231.641 241.586 222.478 232.526 C 211.852 241.758 197.976 247.346 182.795 247.346 Z" style={{fill: 'rgba(240, 240, 240,0.5)'}}></path>
-      </svg>
+        <InteractionBox></InteractionBox>
       </Wrapper>
     </StoreProvider>
   );
