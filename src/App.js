@@ -6,7 +6,7 @@ import {
   InteractionBox,
   Wrapper
 } from 'Components/Styled';
-import { BlueSkySVG } from 'Components';
+import { BlueSkySVG, Logo } from 'Components';
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
         <BlueSkySVG />
       </Background>
       <Wrapper>
+        <Logo />
         <InteractionBox></InteractionBox>
       </Wrapper>
     </StoreProvider>

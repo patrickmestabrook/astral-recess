@@ -4,7 +4,6 @@ import { keyframes } from '@emotion/react'
 const enter = keyframes`
   from, {
     transform: translate(30px, 30px);
-    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.18);
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.18),
   60px 60px 0px 0px rgba(0,0,0,0);
   }
@@ -13,7 +12,6 @@ const enter = keyframes`
 
   to {
     transform: translate(0px, 0px);
-    box-shadow: 60px 60px 0px 0px rgba(0,0,0,0.18);
     box-shadow: 60px 60px 0px 0px rgba(0,0,0,0.18),
   60px 60px 0px 0px rgba(0,0,0,0);
   }
