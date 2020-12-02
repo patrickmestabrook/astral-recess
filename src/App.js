@@ -1,12 +1,12 @@
 import React from 'react';
 import { StoreProvider } from 'easy-peasy';
 import store from './store';
-import { Meditation } from 'Components';
+import { Wrapper } from 'Components/Styled';
 
 function App() {
   return (
     <StoreProvider store={store}>
-      <Meditation />
+      <Wrapper />
     </StoreProvider>
   );
 }
