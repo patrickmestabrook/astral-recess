@@ -10,14 +10,29 @@
     <script type="text/javascript">
       const init = () => {
         // The init options as per https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe
-        const initData = {
+        const options = {
           roomName: "vpaas-magic-cookie-b2d3cc81c80748cfa0e3228337103348/meditation",
           parentNode: document.querySelector('#jaas-container'),
-          jwt: "eyJhbGciOiJSUzI1NiIsImtpZCI6InZwYWFzLW1hZ2ljLWNvb2tpZS1iMmQzY2M4MWM4MDc0OGNmYTBlMzIyODMzNzEwMzM0OC8xZjY0NTQiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJqaXRzaSIsImNvbnRleHQiOnsidXNlciI6eyJpZCI6IjBmOGI3NzYwLWMxN2YtNGExMi1iMTM0LWM2YWMzNzE2NzE0NCIsIm5hbWUiOiJQIEVzdGFicm9vayIsImF2YXRhciI6Imh0dHBzOi8vbGluay50by91c2VyL2F2YXRhci9waWN0dXJlIiwiZW1haWwiOiJqb2huLmRvZUBjb21wYW55LmNvbSIsIm1vZGVyYXRvciI6InRydWUifSwiZmVhdHVyZXMiOnsibGl2ZXN0cmVhbWluZyI6InRydWUiLCJyZWNvcmRpbmciOiJ0cnVlIn19LCJleHAiOjE2OTYyODQwNTIsImlzcyI6ImNoYXQiLCJuYmYiOjE1OTYxOTc2NTIsInJvb20iOiIqIiwic3ViIjoidnBhYXMtbWFnaWMtY29va2llLWIyZDNjYzgxYzgwNzQ4Y2ZhMGUzMjI4MzM3MTAzMzQ4In0.Y5jQngHbD4b8HJTkX9IkSIgtaezx58emIzCB84iMGELrDwllWt1Fi4OhraKFbNmXQvQwf1s-RGujibLRR9s3pwBetZG5WFGw6V5fIEWPtycljdwSchAE2azdtW1GDOtDVbpIDK3dGRjzb8Yt7524Bgpf64ZJ-xg74RF61bW-AA75UyhNSaUwYIsSuBWnRQb4GwSLRyU4x_E9KbpkMHB0VUxIhGKYtoMZN5VxDWEVP0cCYSpIIQQvn2uz4H8lBdpEDjv5ivZc9WlsiO2n0ufrqakPaa4RZ8fuPnVCH65a7hIxH-c5mEx_qAqJu5Pwnq6W7KaiZkL34IyhAc-wk_zsg8xYy6L50a-Fq-BtQDMRxMzZQj2csMvtpGDAtL5e_Ixl0w1QxgZ0v96iMZrNraEM6vi5Z-ykGCOosSPYmeQhhoPelKu45ott_apxfYttV070fqg0wC0xFKMcRIyuuWgA1fSxBRnBRl7kVye2PopPInGocatPuW4Nmf6tGN1IColXQ6_bwSXyYbsmVMW_l-3dQOu59XQGr7kPVlLHwsQuAD3wCdWmQcDkkaqGQ8hWH2dV0qk7VqQeWwped3pP5xstdHhFuOrCLWxmmgJs6cIMbtxJRr9xboRaxCPdCEvLoZvEO758NosV2tVCUzhAIN_k77iKy9G-7BZTTdlLwbhAL8U"
+          jwt: "eyJhbGciOiJSUzI1NiIsImtpZCI6InZwYWFzLW1hZ2ljLWNvb2tpZS1iMmQzY2M4MWM4MDc0OGNmYTBlMzIyODMzNzEwMzM0OC8xZjY0NTQiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJqaXRzaSIsImNvbnRleHQiOnsidXNlciI6eyJpZCI6IjBmOGI3NzYwLWMxN2YtNGExMi1iMTM0LWM2YWMzNzE2NzE0NCIsIm5hbWUiOiJQIEVzdGFicm9vayIsImF2YXRhciI6Imh0dHBzOi8vbGluay50by91c2VyL2F2YXRhci9waWN0dXJlIiwiZW1haWwiOiJqb2huLmRvZUBjb21wYW55LmNvbSIsIm1vZGVyYXRvciI6InRydWUifSwiZmVhdHVyZXMiOnsibGl2ZXN0cmVhbWluZyI6InRydWUiLCJyZWNvcmRpbmciOiJ0cnVlIn19LCJleHAiOjE2OTYyODQwNTIsImlzcyI6ImNoYXQiLCJuYmYiOjE1OTYxOTc2NTIsInJvb20iOiIqIiwic3ViIjoidnBhYXMtbWFnaWMtY29va2llLWIyZDNjYzgxYzgwNzQ4Y2ZhMGUzMjI4MzM3MTAzMzQ4In0.Y5jQngHbD4b8HJTkX9IkSIgtaezx58emIzCB84iMGELrDwllWt1Fi4OhraKFbNmXQvQwf1s-RGujibLRR9s3pwBetZG5WFGw6V5fIEWPtycljdwSchAE2azdtW1GDOtDVbpIDK3dGRjzb8Yt7524Bgpf64ZJ-xg74RF61bW-AA75UyhNSaUwYIsSuBWnRQb4GwSLRyU4x_E9KbpkMHB0VUxIhGKYtoMZN5VxDWEVP0cCYSpIIQQvn2uz4H8lBdpEDjv5ivZc9WlsiO2n0ufrqakPaa4RZ8fuPnVCH65a7hIxH-c5mEx_qAqJu5Pwnq6W7KaiZkL34IyhAc-wk_zsg8xYy6L50a-Fq-BtQDMRxMzZQj2csMvtpGDAtL5e_Ixl0w1QxgZ0v96iMZrNraEM6vi5Z-ykGCOosSPYmeQhhoPelKu45ott_apxfYttV070fqg0wC0xFKMcRIyuuWgA1fSxBRnBRl7kVye2PopPInGocatPuW4Nmf6tGN1IColXQ6_bwSXyYbsmVMW_l-3dQOu59XQGr7kPVlLHwsQuAD3wCdWmQcDkkaqGQ8hWH2dV0qk7VqQeWwped3pP5xstdHhFuOrCLWxmmgJs6cIMbtxJRr9xboRaxCPdCEvLoZvEO758NosV2tVCUzhAIN_k77iKy9G-7BZTTdlLwbhAL8U",
+          configOverwrite: {},
+          interfaceConfigOverwrite: {
+            APP_NAME: 'Astral Recess',
+            CONNECTION_INDICATOR_DISABLED: true,
+            DISABLE_DOMINANT_SPEAKER_INDICATOR: true,
+            DISABLE_PRESENCE_STATUS: true,
+            DISABLE_VIDEO_BACKGROUND: true,
+            TOOLBAR_BUTTONS: [
+                'microphone', 'camera',  'desktop', 'embedmeeting', 'fullscreen',
+                'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
+                'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
+                'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
+                'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone', 'security'
+            ],
+          },
         };
 
         // Init the iframe API with the domain you've set in Branding, or 8x8.vc if you don't have one yet
-        const api = new JitsiMeetExternalAPI("8x8.vc", initData);
+        const api = new JitsiMeetExternalAPI("8x8.vc", options);
       }
       window.onload = init
     </script>
