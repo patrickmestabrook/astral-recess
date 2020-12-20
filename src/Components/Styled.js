@@ -25,7 +25,7 @@ const fade = keyframes`
 
 
 export const Background = styled.div`
-  background: rgb(17, 140, 254);
+  background: rgb(33, 72, 167);
   height: 100vh;
   width: 100vw;
   position: fixed;
