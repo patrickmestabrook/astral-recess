@@ -4,11 +4,10 @@
   <head>
     <script src='https://8x8.vc/external_api.js' async></script>
     <style>
-      html, body { height: 100%; }
-      #jaas-container { height: 500px; width: 500px; }
+      html, body, #jaas-container { height: 100%; }
       body { margin: 0; }
     </style>
-    <style>* {
+    <!-- <style>* {
 			margin: 0;
 			padding: 0;
 		}
@@ -251,7 +250,7 @@
 				position: relative;
 				bottom: auto;
 			}
-		}</style>
+		}</style> -->
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script type="text/javascript">
       const init = () => {
@@ -287,10 +286,10 @@
     </script>
   </head>
   <body>
-    <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column;">
+    <!-- <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column;">
       <div style="margin-bottom: 50px;" data-netlify-identity-menu></div>
-      <div id="jaas-container"></div>
-    </div>
+    </div> -->
+		<div id="jaas-container"></div>
     <div id="root"></div>
   </body>
 </html>
